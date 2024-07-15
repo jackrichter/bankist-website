@@ -69,7 +69,49 @@ header.append(message);
 // Delete elements
 document
   .querySelector('.btn--close-cookie')
-  .addEventListener('click', () => message.remove());
-// document.parentElement.removeChild(message)
+  .addEventListener('click', function () {
+    // message.remove();
+    message.parentElement.removeChild(message);
+  });
 
 /** Styles, Attributes and Classes */
+
+// Styles
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+
+console.log(getComputedStyle(message).color);
+console.log(getComputedStyle(message).height);
+
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+console.log(message.style.height);
+
+document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+// Attributes
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.className);
+
+logo.alt = 'Beautiful minimalist logo';
+
+// Non-standard attributes
+console.log(logo.getAttribute('designer'));
+logo.setAttribute('company', 'Bank-ist');
+
+console.log(logo.src);
+console.log(logo.getAttribute('src'));
+
+const link = document.querySelector('.nav__link--btn');
+console.log(link.href);
+console.log(link.getAttribute('href'));
+
+// Data attributes (always starts with 'data-'")
+console.log(logo.dataset.versionNumber);
+
+// Classes
+logo.classList.add('c', 'j');
+logo.classList.remove('c', 'j');
+logo.classList.toggle('c');
+logo.classList.contains('c');
