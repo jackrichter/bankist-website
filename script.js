@@ -30,6 +30,42 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+// Smooth scrolling
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  // The old way
+  // const s1coords = section1.getBoundingClientRect();
+
+  // console.log(s1coords);
+  // console.log(e.target.getBoundingClientRect());
+  // console.log(
+  //   'Current scrolling position (x/y): ',
+  //   window.pageXOffset,
+  //   window.pageYOffset
+  // );
+  // console.log(
+  //   'Viewport height/width: ',
+  //   document.documentElement.clientHeight,
+  //   document.documentElement.clientWidth
+  // );
+
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // );
+
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+
+  // The modern way
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
 ///////////////////////////////////////
 ///////////////////////////////////////
 ///////////////////////////////////////
