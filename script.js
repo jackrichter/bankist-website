@@ -33,24 +33,24 @@ document.addEventListener('keydown', function (e) {
 ///////////////////////////////////////
 ///////////////////////////////////////
 ///////////////////////////////////////
-// LECTURES
+/* // LECTURES
 
-/** Selecting, Creating, and Deleting Elements */
+// Selecting, Creating, and Deleting Elements /
 
 // Selecting elements
-// console.log(document.documentElement);
-// console.log(document.head);
-// console.log(document.body);
+console.log(document.documentElement);
+console.log(document.head);
+console.log(document.body);
 
 const header = document.querySelector('.header');
 const allSections = document.querySelectorAll('.section');
-// console.log(allSections);
+console.log(allSections);
 
 document.getElementById('section--1');
 const allButtons = document.getElementsByTagName('button');
-// console.log(allButtons);
+console.log(allButtons);
 
-// console.log(document.getElementsByClassName('btn'));
+console.log(document.getElementsByClassName('btn'));
 
 // Creating and inserting elements
 // .insertAdjacentHTML('afterbegin', html);
@@ -74,7 +74,7 @@ document
     message.parentElement.removeChild(message);
   });
 
-/** Styles, Attributes and Classes */
+// Styles, Attributes and Classes /
 
 // Styles
 message.style.backgroundColor = '#37383d';
@@ -115,3 +115,4 @@ logo.classList.add('c', 'j');
 logo.classList.remove('c', 'j');
 logo.classList.toggle('c');
 logo.classList.contains('c');
+ */
