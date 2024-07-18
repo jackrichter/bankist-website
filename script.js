@@ -7,6 +7,8 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
 const openModal = function (e) {
   e.preventDefault();
@@ -30,40 +32,34 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-// Smooth scrolling
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
-
+// Button Scroll
 btnScrollTo.addEventListener('click', function (e) {
-  // The old way
-  // const s1coords = section1.getBoundingClientRect();
-
-  // console.log(s1coords);
-  // console.log(e.target.getBoundingClientRect());
-  // console.log(
-  //   'Current scrolling position (x/y): ',
-  //   window.pageXOffset,
-  //   window.pageYOffset
-  // );
-  // console.log(
-  //   'Viewport height/width: ',
-  //   document.documentElement.clientHeight,
-  //   document.documentElement.clientWidth
-  // );
-
-  // window.scrollTo(
-  //   s1coords.left + window.pageXOffset,
-  //   s1coords.top + window.pageYOffset
-  // );
-
-  // window.scrollTo({
-  //   left: s1coords.left + window.pageXOffset,
-  //   top: s1coords.top + window.pageYOffset,
-  //   behavior: 'smooth',
-  // });
-
   // The modern way
   section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+// Page navigation
+
+// Crude solution
+// document.querySelectorAll('.nav__link').forEach(function (element) {
+//   element.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute('href'); // Not the whole url, which by it's content, can be used as a selector e.g. #section--1
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//   });
+// });
+
+// Event delegation; A better solution:
+// 1. Add an event listener to a common parent element
+// 2. Determine which element originated the event
+document.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  // Matching strategy
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
 });
 
 ///////////////////////////////////////
@@ -151,7 +147,6 @@ logo.classList.add('c', 'j');
 logo.classList.remove('c', 'j');
 logo.classList.toggle('c');
 logo.classList.contains('c');
- */
 
 // Events
 const h1 = document.querySelector('h1');
@@ -196,3 +191,40 @@ document.querySelector('.nav').addEventListener('click', function (e) {
   this.style.backgroundColor = randomColor();
   console.log('NAV', e.target, e.currentTarget);
 });
+
+// Smooth Scrolling
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  // The old way
+  // const s1coords = section1.getBoundingClientRect();
+
+  // console.log(s1coords);
+  // console.log(e.target.getBoundingClientRect());
+  // console.log(
+  //   'Current scrolling position (x/y): ',
+  //   window.pageXOffset,
+  //   window.pageYOffset
+  // );
+  // console.log(
+  //   'Viewport height/width: ',
+  //   document.documentElement.clientHeight,
+  //   document.documentElement.clientWidth
+  // );
+
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset,
+  //   s1coords.top + window.pageYOffset
+  // );
+
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset,
+  //   top: s1coords.top + window.pageYOffset,
+  //   behavior: 'smooth',
+  // });
+
+  // The modern way
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+ */
