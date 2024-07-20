@@ -62,6 +62,33 @@ document.addEventListener('click', function (e) {
   }
 });
 
+// Tabbed Component
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+// Use Event Delegation to add click events to the three buttons (tabs)
+tabsContainer.addEventListener('click', function (e) {
+  // Matching strategy
+  const clicked = e.target.closest('.operations__tab');
+
+  // Guard clause
+  if (!clicked) return;
+
+  // Remove all active classes first
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+  // Active tab
+  clicked.classList.add('operations__tab--active');
+
+  // Active content area
+  console.log(clicked.dataset.tab);
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+});
+
 ///////////////////////////////////////
 ///////////////////////////////////////
 ///////////////////////////////////////
@@ -227,7 +254,6 @@ btnScrollTo.addEventListener('click', function (e) {
   // The modern way
   section1.scrollIntoView({ behavior: 'smooth' });
 });
- */
 
 // DOM Traversing
 
@@ -260,3 +286,4 @@ console.log(h1.parentElement.children);
     child.style.transform = 'scale(0.5)';
   }
 });
+ */
