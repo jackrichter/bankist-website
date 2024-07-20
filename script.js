@@ -1,14 +1,17 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
-
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+const nav = document.querySelector('.nav');
+
+// Modal window
 
 const openModal = function (e) {
   e.preventDefault();
@@ -33,6 +36,7 @@ document.addEventListener('keydown', function (e) {
 });
 
 // Button Scroll
+
 btnScrollTo.addEventListener('click', function (e) {
   // The modern way
   section1.scrollIntoView({ behavior: 'smooth' });
@@ -63,9 +67,6 @@ document.addEventListener('click', function (e) {
 });
 
 // Tabbed Component
-const tabs = document.querySelectorAll('.operations__tab');
-const tabsContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelectorAll('.operations__content');
 
 // Use Event Delegation to add click events to the three buttons (tabs)
 tabsContainer.addEventListener('click', function (e) {
@@ -88,6 +89,29 @@ tabsContainer.addEventListener('click', function (e) {
     .querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add('operations__content--active');
 });
+
+// Menu fade animation
+
+const handleHoover = function (e) {
+  // console.log(this, e.currentTarget);
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(s => {
+      if (s !== link) {
+        s.style.opacity = this;
+      }
+    });
+    logo.style.opacity = this;
+  }
+};
+
+// Passing "argument" (associated to the 'this' keyword)
+nav.addEventListener('mouseover', handleHoover.bind(0.5));
+
+nav.addEventListener('mouseout', handleHoover.bind(1));
 
 ///////////////////////////////////////
 ///////////////////////////////////////
