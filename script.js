@@ -10,8 +10,10 @@ const tabs = document.querySelectorAll('.operations__tab');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabsContent = document.querySelectorAll('.operations__content');
 const nav = document.querySelector('.nav');
+const header = document.querySelector('.header');
 
-// Modal window
+///////////////////////////////////////
+// MODAL WINDOW
 
 const openModal = function (e) {
   e.preventDefault();
@@ -35,16 +37,22 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-// Button Scroll
+///////////////////////////////////////
+
+///////////////////////////////////////
+// BUTTON SCROLL
 
 btnScrollTo.addEventListener('click', function (e) {
   // The modern way
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 
-// Page navigation
+///////////////////////////////////////
 
-// Crude solution
+///////////////////////////////////////
+// PAGE NAVIGATION
+
+// Crude solution:
 // document.querySelectorAll('.nav__link').forEach(function (element) {
 //   element.addEventListener('click', function (e) {
 //     e.preventDefault();
@@ -66,7 +74,10 @@ document.addEventListener('click', function (e) {
   }
 });
 
-// Tabbed Component
+///////////////////////////////////////
+
+///////////////////////////////////////
+// TABBED COMPONENT
 
 // Use Event Delegation to add click events to the three buttons (tabs)
 tabsContainer.addEventListener('click', function (e) {
@@ -90,7 +101,10 @@ tabsContainer.addEventListener('click', function (e) {
     .classList.add('operations__content--active');
 });
 
-// Menu fade animation
+///////////////////////////////////////
+
+///////////////////////////////////////
+// MENU FADE ANIMATION
 
 const handleHoover = function (e) {
   // console.log(this, e.currentTarget);
@@ -113,20 +127,62 @@ nav.addEventListener('mouseover', handleHoover.bind(0.5));
 
 nav.addEventListener('mouseout', handleHoover.bind(1));
 
-// Sticky navigation
+///////////////////////////////////////
+
+///////////////////////////////////////
+// STICKY NAVIGATION
 
 // 1. Using the Window Scroll Event
-const initialCoords = section1.getBoundingClientRect();
-// console.log(initialCoords);
+// const initialCoords = section1.getBoundingClientRect();
+// // console.log(initialCoords);
 
-window.addEventListener('scroll', function (e) {
-  // console.log(this.window.scrollY);
-  if (this.window.scrollY > initialCoords.top) {
+// window.addEventListener('scroll', function (e) {
+//   // console.log(this.window.scrollY);
+//   if (this.window.scrollY > initialCoords.top) {
+//     nav.classList.add('sticky');
+//   } else {
+//     nav.classList.remove('sticky');
+//   }
+// });
+
+// 2. Intersection Observer API
+// const obsCallback = function (entries, observer) {
+//   entries.forEach(entry => {
+//     console.log(entry);
+//   });
+// };
+
+// const obsOptions = {
+//   root: null, // null means observing the viewport
+//   threshold: [0, 0.2], // Callback function called when the target element (section1) intersects the root element at the defined threshold (10%)
+// };
+
+// const observer = new IntersectionObserver(obsCallback, obsOptions);
+
+// observer.observe(section1);
+
+const navHeight = nav.getBoundingClientRect().height;
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+  // console.log(entry);
+
+  if (entry.isIntersecting === false) {
     nav.classList.add('sticky');
   } else {
     nav.classList.remove('sticky');
   }
+};
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
 });
+
+headerObserver.observe(header);
+
+///////////////////////////////////////
 
 ///////////////////////////////////////
 ///////////////////////////////////////
