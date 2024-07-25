@@ -11,6 +11,7 @@ const tabsContainer = document.querySelector('.operations__tab-container');
 const tabsContent = document.querySelectorAll('.operations__content');
 const nav = document.querySelector('.nav');
 const header = document.querySelector('.header');
+const slides = document.querySelectorAll('.slide');
 
 ///////////////////////////////////////
 // MODAL WINDOW
@@ -234,6 +235,51 @@ const imgObserver = new IntersectionObserver(loadImg, {
 });
 
 imgTargets.forEach(img => imgObserver.observe(img));
+
+///////////////////////////////////////
+// SLIDER
+// console.log(slides);
+
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+
+let curSlide = 0;
+const maxSlides = slides.length - 1;
+
+// Temp code: Be able to see the slides side by side
+// const slider = document.querySelector('.slider');
+// slider.style.transform = 'scale(0.4) translateX(-1400px)';
+// slider.style.overflow = 'visible';
+
+const goToSlide = function (slide) {
+  slides.forEach(
+    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+  );
+};
+goToSlide(0);
+
+// Go to the next slide
+const nextSlide = function () {
+  if (curSlide === maxSlides) {
+    curSlide = 0;
+  } else {
+    curSlide++;
+  }
+  goToSlide(curSlide);
+};
+
+// Go to the previous slide
+const prevSlide = function () {
+  if (curSlide === 0) {
+    curSlide = maxSlides;
+  } else {
+    curSlide--;
+  }
+  goToSlide(curSlide);
+};
+
+btnRight.addEventListener('click', nextSlide);
+btnLeft.addEventListener('click', prevSlide);
 
 ///////////////////////////////////////
 
