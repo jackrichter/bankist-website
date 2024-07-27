@@ -529,4 +529,23 @@ console.log(h1.parentElement.children);
     child.style.transform = 'scale(0.5)';
   }
 });
+
+// DOM EVENTS LIFECYCLE
+
+// DomContentLoaded: Html must be completely parsed and all scrips downloaded and executed
+document.addEventListener('DOMContentLoaded', function (e) {
+  console.log('HTML parsed and DOM built!', e);
+});
+
+// Load: Waits until all resources like pictures, external resources and CSS are also loaded (after DOM been built)
+window.addEventListener('load', function (e) {
+  console.log('Page fully loaded!', e);
+});
+
+// beforeUnload
+window.addEventListener('beforeunload', function (e) {
+  e.preventDefault();
+  console.log(e);
+  e.returnValue = '';
+});
  */
